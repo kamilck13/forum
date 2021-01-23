@@ -4,9 +4,9 @@
     <h1>Categories</h1>
     <ul class="list-group">
         {% for category in object_list %}
-            <li class="list-group-item"><a href="{% url 'category-detail' category.pk %}">{{ category.title }}</a></li>
+            <li class="list-group-item w-50"><a href="{% url 'category-detail' category.pk %}">{{ category.title }}</a></li>
         {% empty %}
-            <li class="list-group-item">No category yet.</li>
+            <li class="list-group-item w-50">No category yet.</li>
         {% endfor %}
     </ul>
 {% endblock %}
