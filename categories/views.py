@@ -1,13 +1,16 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from categories.models import Category
 
-
 class CategoryListView(ListView):
+    model = Category
+
+class CategoryDetailView(LoginRequiredMixin, DetailView):
     model = Category
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
@@ -17,3 +20,17 @@ class CategoryCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(CategoryCreate, self).form_valid(form)
+
+class CategoryUpdate(UserPassesTestMixin, UpdateView):
+    model = Category
+    fields = ['title', 'body']
+
+    def test_func(self):
+        return self.request.user == self.get_object().created_by
+
+class CategoryDelete(UserPassesTestMixin, DeleteView):
+    model = Category
+    success_url = reverse_lazy('category-list')
+
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user == self.object.created_by

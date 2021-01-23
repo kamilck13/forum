@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Category deleting</h1>
+    <h3>Are you sure?</h3>
+    <p>You're about to delete <strong>{{ object }}</strong>. Please confirm.</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="btn btn-link"
+               type="button" value="Cancel"
+               onclick="window.history.go(-1);"/>
+        <input class="btn btn-danger" type="submit" value="Confirm"/>
+    </form>
+{% endblock %}
+
+{% block side_menu %}
+    <li>
+        <a href="{% url 'category-list' %}">Back to list</a>
+    </li>
+{% endblock %}

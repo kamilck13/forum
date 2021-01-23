@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ category.title }}</h1>
+    <h4>Created by: {{ category.created_by }}</h4>
+    <div class="well well-lg">{{ category.body }}</div>
+{% endblock %}
+
+{% block side_menu %}
+    <li>
+        <a href="{% url 'category-update' category.pk %}">Update</a>
+    </li>
+    <li>
+        <a href="{% url 'category-delete' category.pk %}">Delete</a>
+    </li>
+    <li>
+        <a href="{% url 'category-list' %}">Back to list</a>
+    </li>
+{% endblock %}
