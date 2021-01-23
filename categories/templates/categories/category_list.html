@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Categories</h1>
+    <ul class="list-group">
+        {% for category in object_list %}
+            <li class="list-group-item"><a href="{% url 'category-detail' category.pk %}">{{ category.title }}</a></li>
+        {% empty %}
+            <li class="list-group-item">No category yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block side_menu %}
+    <li>
+        <a href="{% url 'category-add' %}">Add category</a>
+    </li>
+{% endblock %}
