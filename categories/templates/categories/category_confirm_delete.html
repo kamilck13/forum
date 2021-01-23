@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block side_menu %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">HOME</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'category-list' %}">Category</a></li>
+{% endblock %}
+
 {% block content %}
     <h1>Category deleting</h1>
     <h3>Are you sure?</h3>
@@ -11,10 +16,4 @@
                onclick="window.history.go(-1);"/>
         <input class="btn btn-danger" type="submit" value="Confirm"/>
     </form>
-{% endblock %}
-
-{% block side_menu %}
-    <li>
-        <a href="{% url 'category-list' %}">Back to list</a>
-    </li>
 {% endblock %}

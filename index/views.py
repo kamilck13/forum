@@ -1,9 +1,10 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import View
+from django.views.generic import ListView
 
+from index.models import Index
 
-class Index(View):
-    pass
+class Index(ListView):
+    model = Index
 

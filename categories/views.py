@@ -12,24 +12,28 @@ class CategoryListView(ListView):
 
 class CategoryDetailView(LoginRequiredMixin, DetailView):
     model = Category
+    login_url = 'login'
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
     model = Category
+    login_url = 'login'
     fields = ['title', 'body']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(CategoryCreate, self).form_valid(form)
 
-class CategoryUpdate(UserPassesTestMixin, UpdateView):
+class CategoryUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Category
+    login_url = 'login'
     fields = ['title', 'body']
 
     def test_func(self):
         return self.request.user == self.get_object().created_by
 
-class CategoryDelete(UserPassesTestMixin, DeleteView):
+class CategoryDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Category
+    login_url = 'login'
     success_url = reverse_lazy('category-list')
 
     def test_func(self):

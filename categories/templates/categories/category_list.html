@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block side_menu %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">HOME</a></li>
+    <li class="nav-item"><a class="nav-link active" href="{% url 'category-list' %}">Category</a></li>
+    <li class="nav-item nav-link text-white">|</li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'category-add' %}">Add category</a></li>
+{% endblock %}
+
 {% block content %}
     <h1>Categories</h1>
     <ul class="list-group">
@@ -9,10 +16,4 @@
             <li class="list-group-item w-50">No category yet.</li>
         {% endfor %}
     </ul>
-{% endblock %}
-
-{% block side_menu %}
-    <li>
-        <a href="{% url 'category-add' %}">Add category</a>
-    </li>
 {% endblock %}
