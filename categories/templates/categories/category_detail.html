@@ -2,7 +2,8 @@
 
 {% block side_menu %}
     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">HOME</a></li>
-    <li class="nav-item"><a class="nav-link" href="{% url 'category-list' %}">Category</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'category-list' %}">Categories</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'discussion-list' %}">Discussions</a></li>
     <li class="nav-item nav-link text-white">|</li>
     <li class="nav-item"><a class="nav-link" href="{% url 'category-add' %}">Add category</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'category-update' category.pk %}">Update</a></li>

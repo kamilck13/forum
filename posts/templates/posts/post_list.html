@@ -5,13 +5,16 @@
     <li class="nav-item"><a class="nav-link" href="{% url 'category-list' %}">Categories</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-list' %}">Discussions</a></li>
     <li class="nav-item nav-link text-white">|</li>
-    <li class="nav-item active"><a class="nav-link" href="{% url 'category-add' %}">Add category</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'post-add' %}">Add post</a></li>
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
+    <h1>Posts</h1>
+    <ul class="list-group">
+        {% for post in object_list %}
+            <li class="list-group-item w-50"><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
+        {% empty %}
+            <li class="list-group-item w-50">No post yet.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
