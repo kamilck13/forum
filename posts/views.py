@@ -20,7 +20,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     login_url = 'login'
-    fields = ['title', 'body']
+    fields = ['discussion', 'body']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
@@ -30,7 +30,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     login_url = 'login'
-    fields = ['title', 'body']
+    fields = ['discussion', 'body']
 
     def test_func(self):
         return self.request.user == self.get_object().created_by

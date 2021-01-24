@@ -12,7 +12,7 @@
     <h1>Posts</h1>
     <ul class="list-group">
         {% for post in object_list %}
-            <li class="list-group-item w-50"><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
+            <li class="list-group-item w-50"><a href="{% url 'post-detail' post.pk %}">{{ post.body }}</a></li>
         {% empty %}
             <li class="list-group-item w-50">No post yet.</li>
         {% endfor %}

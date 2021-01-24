@@ -5,10 +5,12 @@ from django.db import models
 from django.urls import reverse
 from django_extensions.db.models import TimeStampedModel
 
+from categories.models import Category
+
 
 class Discussion(TimeStampedModel):
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=256)
-    body = models.TextField()
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):

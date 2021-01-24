@@ -14,4 +14,10 @@
     <h1>{{ discussion.title }}</h1>
     <h4>Created by: {{ discussion.created_by }}</h4>
     <div class="well well-lg">{{ discussion.body }}</div>
+
+    {% for post in posts %}
+        <a href="{% url 'post-detail' post.pk %}">{{ post.body }}</a>
+    {% empty %}
+        No posts yet.
+    {% endfor %}
 {% endblock %}
