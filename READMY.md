@@ -1,6 +1,8 @@
 # Simple forum in Django
 
-to run this app type:
+To run this app type:
 ```sh
+python3 manage.py makemigrations
+python3 manage.py migrate
 python3 manage.py runserver
 ```
