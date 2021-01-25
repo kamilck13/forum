@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'index',
     'categories',
     'discussions',
-    'posts'
+    'posts',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +132,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REGISTRATION_OPEN = True

@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from discussions.models import Discussion
 from posts.models import Post
 
 
@@ -20,11 +21,17 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     login_url = 'login'
-    fields = ['discussion', 'body']
+    fields = ['discussion','body']
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(PostCreate, self).form_valid(form)
+
+    def get_initial(self):
+        discussion = get_object_or_404(Discussion, pk=self.kwargs.get('pk'))
+        return {
+            'discussion': discussion,
+        }
 
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

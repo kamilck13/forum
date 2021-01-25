@@ -11,6 +11,8 @@
 {% endblock %}
 
 {% block content %}
+    {% if object == None%}{% else %} <h5>Category: {{ post.discussion }}</h5> {% endif %}
     <h4>Created by: {{ post.created_by }}</h4>
     <div class="well well-lg">{{ post.body }}</div>
+{% load static %} <div class="fixed-bottom"><img class="float-right" src="{% static 'img/obrazek.jpg' %}"></div>
 {% endblock %}

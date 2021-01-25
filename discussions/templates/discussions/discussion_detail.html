@@ -5,19 +5,31 @@
     <li class="nav-item"><a class="nav-link" href="{% url 'category-list' %}">Categories</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-list' %}">Discussions</a></li>
     <li class="nav-item nav-link text-white">|</li>
+    {% if user == discussion.created_by %}
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-add' %}">Add discussion</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-update' discussion.pk %}">Update</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-delete' discussion.pk %}">Delete</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <h1>{{ discussion.title }}</h1>
-    <h4>Created by: {{ discussion.created_by }}</h4>
-    <div class="well well-lg">{{ discussion.body }}</div>
+    <h1>Discussion: {{ discussion.title }}</h1>
+    <h5>Category: {{ discussion.categories }}</h5>
+    <p>Created by: {{ discussion.created_by }}</p>
 
     {% for post in posts %}
-        <a href="{% url 'post-detail' post.pk %}">{{ post.body }}</a>
+        <div class="border rounded m-2">
+            <div class="p-1 border-bottom border-success bg-light">{{ post.created_by }} wrote:</div>
+            <div class="p-2">{{ post.body }}</div>
+            <div class="p-1">
+                {% if user == post.created_by %}
+                <div class="float-left"><a href="{% url 'post-update' post.pk %}">Edit Post</a></div>
+                {% endif %}
+                <div class="text-right">{{ post.datetime }}</div>
+            </div>
+        </div>
     {% empty %}
         No posts yet.
     {% endfor %}
+    <a href="{% url 'post-add' discussion.pk %}">Reply</a>
 {% endblock %}

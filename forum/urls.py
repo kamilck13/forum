@@ -22,5 +22,5 @@ urlpatterns = [
     path(r'categories/', include('categories.urls')),
     path(r'discussions/', include('discussions.urls')),
     path(r'posts/', include('posts.urls')),
-    path('', include('index.urls')),
+    path(r'', include('index.urls')),
 ]

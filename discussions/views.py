@@ -36,7 +36,7 @@ class DiscussionCreate(LoginRequiredMixin, CreateView):
 class DiscussionUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Discussion
     login_url = 'login'
-    fields = ['categories', 'title']
+    fields = ['title']
 
     def test_func(self):
         return self.request.user == self.get_object().created_by

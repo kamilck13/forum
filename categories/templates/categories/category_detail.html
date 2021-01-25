@@ -6,12 +6,22 @@
     <li class="nav-item"><a class="nav-link" href="{% url 'discussion-list' %}">Discussions</a></li>
     <li class="nav-item nav-link text-white">|</li>
     <li class="nav-item"><a class="nav-link" href="{% url 'category-add' %}">Add category</a></li>
+    {% if user == category.created_by %}
     <li class="nav-item"><a class="nav-link" href="{% url 'category-update' category.pk %}">Update</a></li>
     <li class="nav-item"><a class="nav-link" href="{% url 'category-delete' category.pk %}">Delete</a></li>
+    {% endif%}
 {% endblock %}
 
 {% block content %}
     <h1>{{ category.title }}</h1>
-    <h4>Created by: {{ category.created_by }}</h4>
-    <div class="well well-lg">{{ category.body }}</div>
+    <h5>Created by: {{ category.created_by }}</h5>
+    <div class="well well-lg">Description: {{ category.body }}</div>
+    <h5 class="p-4">Discussions:</h5>
+    <ul class="list-group">
+    {% for discussion in discussions %}
+        <li class="list-group-item w-50"><a href="{% url 'discussion-detail' discussion.pk %}">{{ discussion.title }}</a></li>
+    {% empty %}
+        No category yet.
+    {% endfor %}
+        {% load static %} <div class="fixed-bottom"><img class="float-right" src="{% static 'img/obrazek.jpg' %}"></div>
 {% endblock %}

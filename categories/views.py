@@ -6,6 +6,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from categories.models import Category
+from discussions.models import Discussion
+
 
 class CategoryListView(ListView):
     model = Category
@@ -13,6 +15,11 @@ class CategoryListView(ListView):
 class CategoryDetailView(LoginRequiredMixin, DetailView):
     model = Category
     login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDetailView, self).get_context_data(**kwargs)
+        context['discussions'] = Discussion.objects.filter(categories=self.get_object().pk)
+        return context
 
 class CategoryCreate(LoginRequiredMixin, CreateView):
     model = Category

@@ -14,4 +14,7 @@ class Discussion(TimeStampedModel):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('discussion-detail', kwargs={'pk': self.pk})
+        return reverse('post-add', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.title
